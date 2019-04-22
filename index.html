@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Convert Masse using Javascript/Jquery">
+    <meta name="author" content="Younes Zaidi">
+    <link rel="icon" href="image/logo.png">
+    <title>Convert Masse</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/floating-labels.css" rel="stylesheet">
+  </head>
+  <body>
+    <form class="form-signin">
+      <div class="text-center mb-4">
+        <img class="mb-4" src="image/logo.png" alt="" width="72" height="62">
+        <h1 class="h3 mb-3 font-weight-normal">Convert Masse</h1>
+        <p><a href="#">Masse Type.</a>  
+		   <code style="font-size:13px">Gramme,Tonne,Kilogramme,Milligramme,Microgramme,Tonne longue,Stone,Livre,Once</code>
+		</p>
+      </div>
+	  <!--<select id='changet'><option selected="1" value="Masse">Masse</option></select>--->
+	  <div class="form-label-group">
+	    <div id='DivFirstChoice'>
+		  <select id='FirstChoice'  class="form-control">
+		    <option>Tonne</option>
+			<option selected>Kilogramme</option>
+			<option>Gramme</option>
+			<option>Milligramme</option>
+			<option>Microgramme</option>
+			<option>Tonne longue</option>
+			<option>Stone</option>
+			<option>Livre</option>
+			<option>Once</option>
+		  </select>
+        </div>
+	  </div>
+	  <div class="form-label-group">
+	    <div id='DivSecondChoice'>
+		  <select id='SecondChoice'  class="form-control">
+		    <option>Tonne</option>
+			<option>Kilogramme</option>
+			<option selected>Gramme</option>
+			<option>Milligramme</option>
+			<option>Microgramme</option>
+			<option>Tonne longue</option>
+			<option>Stone</option>
+			<option>Livre</option>
+		    <option>Once</option>
+		 </select> 
+        </div>
+	  </div>
+      <div class="form-label-group">
+        <input type="text" id='Nbr' class="form-control" placeholder="Number" required autofocus>
+        <label for="Nbr">Number</label>
+      </div>
+      <div class="checkbox mb-3">     
+		     <div id='resulta'></div>
+             <div id='formule'></div>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="button" onclick='BtnConvert()'>Convert</button>
+      <p class="mt-5 mb-3 text-muted text-center" style='font-size:14px'>&copy; Younes Zaidi /<code>  2019</code></p>
+    </form>
+  </body>
+</html>
+    <script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+ <script>
+  
+ function BtnConvert(){
+    var FirstChoice  = $('#FirstChoice').val();
+	var SecondChoice = $('#SecondChoice').val();
+	var Nbr          = $('#Nbr').val();
+	if(Nbr){
+     if(FirstChoice == 'Gramme'){
+	    Gramme(SecondChoice,Nbr);
+	 }else if(FirstChoice == 'Tonne'){
+	    Tonne(SecondChoice,Nbr);
+	 }else if(FirstChoice == 'Kilogramme'){
+	    Kilogramme(SecondChoice,Nbr);
+	 }else if(FirstChoice == 'Milligramme'){
+	    Milligramme(SecondChoice,Nbr);
+	 }else if(FirstChoice == 'Microgramme'){
+	    Microgramme(SecondChoice,Nbr);
+	 }else if(FirstChoice == 'Tonne longue'){
+	    Tonnelongue(SecondChoice,Nbr);
+	 }else if(FirstChoice == 'Stone'){
+	    Stone(SecondChoice,Nbr);
+	 }else if(FirstChoice == 'Livre'){
+	    Livre(SecondChoice,Nbr);
+	 }else if(FirstChoice == 'Once'){
+	    Once(SecondChoice,Nbr);
+	 }
+	}else{
+	$('#formule').html('<span class="badge badge-danger">Add Number Please !!</span>');
+	}
+  }
+  
+ function Tonne(SecondChoice,Nbr){
+    var resulta      = '';
+	var formule      = '';
+    if(SecondChoice =='Tonne'){
+	  resulta =  Nbr ;
+	  formule = 'Same Number';
+	}else if(SecondChoice =='Kilogramme'){
+	  resulta =  Nbr * 1000;
+	  formule = 'multiplier la valeur "masse" par 1000';
+	}else if(SecondChoice =='Gramme'){
+	  resulta =  Nbr * parseInt(1e+6);
+	  formule = 'multiplier la valeur "masse" par 1e+6';
+	}else if(SecondChoice =='Milligramme'){
+	  resulta =  Nbr * parseInt(1e+9);
+	  formule = 'multiplier la valeur "masse" par 1e+9';
+	}else if(SecondChoice =='Microgramme'){
+	  resulta =  Nbr * parseInt(1e+12);
+	  formule = 'multiplier la valeur "masse" par 1e+12';
+	}else if(SecondChoice =='Tonne longue'){
+	  resulta =  Nbr / parseInt(1.016);
+	  formule = 'diviser la valeur "masse" par 1,016';
+	}else if(SecondChoice =='Stone'){
+	  resulta =  Nbr * 157.473;
+	  formule = 'multiplier la valeur "masse" par 157,473';
+	}else if(SecondChoice =='Livre'){
+	  resulta =  Nbr * 2204.623;
+	  formule = 'pour obtenir un résultat approximatif, multiplier la valeur "masse" par 2204,623';
+	}else if(SecondChoice =='Once'){
+	  resulta =  Nbr * 35273.962;
+	  formule = 'multiplier la valeur "masse" par 35273,962';
+	}
+	result(resulta,formule,SecondChoice);
+ } 
+ 
+ function Kilogramme(SecondChoice,Nbr){
+    var resulta      = '';
+	var formule      = '';
+    if(SecondChoice =='Tonne'){
+	  resulta =  Nbr / 1000;
+	  formule = 'diviser la valeur "masse" par 1000';
+	}else if(SecondChoice =='Kilogramme'){
+	  resulta =  Nbr ;
+	  formule = 'same Number';
+	}else if(SecondChoice =='Gramme'){
+	  resulta =  Nbr * 1000;
+	  formule = 'multiplier la valeur "masse" par 1000';
+	}else if(SecondChoice =='Milligramme'){
+	  resulta =  Nbr * parseInt(1e+6);
+	  formule = 'multiplier la valeur "masse" par 1e+6';
+	}else if(SecondChoice =='Microgramme'){
+	  resulta =  Nbr * parseInt(1e+9);
+	  formule = 'multiplier la valeur "masse" par 1e+9';
+	}else if(SecondChoice =='Tonne longue'){
+	  resulta =  Nbr / 1016.047;
+	  formule = 'diviser la valeur "masse" par 1016,047';
+	}else if(SecondChoice =='Stone'){
+	  resulta =  Nbr / 6.35;
+	  formule = 'pour obtenir un résultat approximatif, diviser la valeur "masse" par 6,35';
+	}else if(SecondChoice =='Livre'){
+	  resulta =  Nbr * 2.205;
+	  formule = 'pour obtenir un résultat approximatif, multiplier la valeur "masse" par 2,205';
+	}else if(SecondChoice =='Once'){
+	  resulta =  Nbr * 35.274;
+	  formule = 'multiplier la valeur "masse" par 35,274';
+	}
+	result(resulta,formule,SecondChoice);
+ }
+ 
+ function Gramme(SecondChoice,Nbr){
+    var resulta      = '';
+	var formule      = '';
+    if(SecondChoice =='Kilogramme'){
+	  resulta =  Nbr / 1000;
+	  formule = 'diviser la valeur "masse" par 1000';
+	}
+    if(SecondChoice =='Tonne'){
+	  resulta =  Nbr / parseInt(1e+6);
+	  formule = 'diviser la valeur "masse" par 1e+6';
+	}else if(SecondChoice =='Milligramme'){
+	  resulta =  Nbr * 1000;
+	  formule = 'multiplier la valeur "masse" par 1000';
+	}else if(SecondChoice =='Microgramme'){
+	  resulta =  Nbr * parseInt(1e+6);
+	  formule = 'multiplier la valeur "masse" par 1e+6';
+	}else if(SecondChoice =='Tonne longue'){
+	  resulta =  Nbr / parseInt(1.016e+6);
+	  formule = 'Error diviser la valeur "masse" par 1,016e+6';
+	}else if(SecondChoice =='Stone'){
+	  resulta =  Nbr /  6350.293;
+	  formule = 'pour obtenir un résultat approximatif, diviser la valeur "masse" par 6350,293';
+	}else if(SecondChoice =='Livre'){
+	  resulta =  Nbr /  453.592;
+	  formule = 'pour obtenir un résultat approximatif, diviser la valeur "masse" par 453,592';
+	}else if(SecondChoice =='Once'){
+	  resulta =  Nbr /  28.35;
+	  formule = 'pour obtenir un résultat approximatif, diviser la valeur "masse" par 28,35';
+	}else if(SecondChoice =='Gramme'){
+	  resulta =  Nbr;
+	  formule = 'Same Number';
+	}
+	result(resulta,formule,SecondChoice);
+ }
+ 
+ function Milligramme(SecondChoice,Nbr){
+    var resulta      = '';
+	var formule      = '';
+    if(SecondChoice =='Kilogramme'){
+	  resulta =  Nbr / parseInt(1e+6);
+	  formule = 'diviser la valeur "masse" par 1e+6';
+	}else if(SecondChoice =='Tonne'){
+	  resulta =  Nbr / parseInt(1e+9);
+	  formule = 'diviser la valeur "masse" par 1e+9';
+	}else if(SecondChoice =='Milligramme'){
+	  resulta =  Nbr;
+	  formule = 'Same Number';
+	}else if(SecondChoice =='Microgramme'){
+	  resulta =  Nbr * 1000;
+	  formule = 'multiplier la valeur "masse" par 1000';
+	}else if(SecondChoice =='Tonne longue'){
+	  resulta =  Nbr / parseInt(1.016e+9);
+	  formule = 'diviser la valeur "masse" par 1,016e+9';
+	}else if(SecondChoice =='Stone'){
+	  resulta =  Nbr / parseInt(6.35e+6);
+	  formule = 'pour obtenir un résultat approximatif, diviser la valeur "masse" par 6,35e+6';
+	}else if(SecondChoice =='Livre'){
+	  resulta =  Nbr / 453592.37;
+	  formule = 'diviser la valeur "masse" par 453592,37';
+	}else if(SecondChoice =='Once'){
+	  resulta =  Nbr / 28349.523;
+	  formule = 'pour obtenir un résultat approximatif, diviser la valeur "masse" par 28349,523';
+	}else if(SecondChoice =='Gramme'){
+	  resulta =  Nbr / 1000;
+	  formule = 'diviser la valeur "masse" par 1000';
+	}
+	result(resulta,formule,SecondChoice);
+ }
+ 
+ function Microgramme(SecondChoice,Nbr){
+    var resulta      = '';
+	var formule      = '';
+    if(SecondChoice =='Kilogramme'){
+	  resulta =  Nbr / parseInt(1e+9);
+	  formule = 'diviser la valeur "masse" par 1e+9';
+	}else if(SecondChoice =='Tonne'){
+	  resulta =  Nbr / parseInt(1e+12);
+	  formule = 'diviser la valeur "masse" par 1e+12';
+	}else if(SecondChoice =='Milligramme'){
+	  resulta =  Nbr / 1000;
+	  formule = 'diviser la valeur "masse" par 1000';
+	}else if(SecondChoice =='Microgramme'){
+	  resulta =  Nbr ;
+	  formule = 'Same Number';
+	}else if(SecondChoice =='Tonne longue'){
+	  resulta =  Nbr / parseInt(1.016e+12);
+	  formule = 'diviser la valeur "masse" par 1,016e+12';
+	}else if(SecondChoice =='Stone'){
+	  resulta =  Nbr / parseInt(6.35e+9);
+	  formule = 'pour obtenir un résultat approximatif, diviser la valeur "masse" par 6,35e+9';
+	}else if(SecondChoice =='Livre'){
+	  resulta =  Nbr / parseInt(4.536e+8);
+	  formule = 'diviser la valeur "masse" par 4,536e+8';
+	}else if(SecondChoice =='Once'){
+	  resulta =  Nbr / parseInt(2.835e+7);
+	  formule = 'diviser la valeur "masse" par 2,835e+7';
+	}else if(SecondChoice =='Gramme'){
+	  resulta =  Nbr / parseInt(1e+6);
+	  formule = 'diviser la valeur "masse" par 1e+6';
+	}
+	result(resulta,formule,SecondChoice);
+ }
+ 
+ function Tonnelongue(SecondChoice,Nbr){
+    var resulta      = '';
+	var formule      = '';
+    if(SecondChoice =='Kilogramme'){
+	  resulta =  Nbr * 1016.047;
+	  formule = 'multiplier la valeur "masse" par 1016,047';
+	}else if(SecondChoice =='Tonne'){
+	  resulta =  Nbr *1.016;
+	  formule = 'multiplier la valeur "masse" par 1,016';
+	}else if(SecondChoice =='Milligramme'){
+	  resulta =  Nbr * parseInt(1.016e+9);
+	  formule = 'multiplier la valeur "masse" par 1,016e+9';
+	}else if(SecondChoice =='Microgramme'){
+	  resulta =  Nbr * parseInt(1.016e+12);
+	  formule = 'multiplier la valeur "masse" par 1,016e+12';
+	}else if(SecondChoice =='Tonne longue'){
+	  resulta =  Nbr;
+	  formule = 'Same Number';
+	}else if(SecondChoice =='Stone'){
+	  resulta =  Nbr * 160;
+	  formule = 'multiplier la valeur "masse" par 160';
+	}else if(SecondChoice =='Livre'){
+	  resulta =  Nbr *2240;
+	  formule = 'multiplier la valeur "masse" par 2240';
+	}else if(SecondChoice =='Once'){
+	  resulta =  Nbr * 35840;
+	  formule = 'multiplier la valeur "masse" par 35840';
+	}else if(SecondChoice =='Gramme'){
+	  resulta =  Nbr * parseInt(1.016e+6);
+	  formule = 'multiplier la valeur "masse" par 1,016e+6';
+	}
+	result(resulta,formule,SecondChoice);
+ }
+ 
+ function Stone(SecondChoice,Nbr){
+    var resulta      = '';
+	var formule      = '';
+    if(SecondChoice =='Kilogramme'){
+	  resulta =  Nbr * 6.35 ;
+	  formule = 'pour obtenir un résultat approximatif, multiplier la valeur "masse" par 6,35';
+	}else if(SecondChoice =='Tonne'){
+	  resulta =  Nbr / 157.473;
+	  formule = 'diviser la valeur "masse" par 157,473';
+	}else if(SecondChoice =='Milligramme'){
+	  resulta =  Nbr * parseInt(6.35e+6);
+	  formule = 'pour obtenir un résultat approximatif, multiplier la valeur "masse" par 6,35e+6';
+	}else if(SecondChoice =='Microgramme'){
+	  resulta =  Nbr * parseInt(6.35e+9);
+	  formule = 'pour obtenir un résultat approximatif, multiplier la valeur "masse" par 6,35e+9';
+	}else if(SecondChoice =='Tonne longue'){
+	  resulta =  Nbr / 160;
+	  formule = 'diviser la valeur "masse" par 160';
+	}else if(SecondChoice =='Stone'){
+	  resulta =  Nbr ;
+	  formule = 'Same Number';
+	}else if(SecondChoice =='Livre'){
+	  resulta =  Nbr * 14;
+	  formule = 'multiplier la valeur "masse" par 14';
+	}else if(SecondChoice =='Once'){
+	  resulta =  Nbr * 224;
+	  formule = 'multiplier la valeur "masse" par 224';
+	}else if(SecondChoice =='Gramme'){
+	  resulta =  Nbr * 6350.293;
+	  formule = 'pour obtenir un résultat approximatif, multiplier la valeur "masse" par 6350,293';
+	}
+	result(resulta,formule,SecondChoice);
+ }
+ 
+ function Livre(SecondChoice,Nbr){
+    var resulta      = '';
+	var formule      = '';
+    if(SecondChoice =='Kilogramme'){
+	  resulta =  Nbr / 2.205 ;
+	  formule = 'pour obtenir un résultat approximatif, diviser la valeur "masse" par 2,205';
+	}else if(SecondChoice =='Tonne'){
+	  resulta =  Nbr / 2204.623;
+	  formule = 'pour obtenir un résultat approximatif, diviser la valeur "masse" par 2204,623';
+	}else if(SecondChoice =='Milligramme'){
+	  resulta =  Nbr * 453592.37;
+	  formule = 'multiplier la valeur "masse" par 453592,37';
+	}else if(SecondChoice =='Microgramme'){
+	  resulta =  Nbr * parseInt(4.536e+8);
+	  formule = 'multiplier la valeur "masse" par 4,536e+8';
+	}else if(SecondChoice =='Tonne longue'){
+	  resulta =  Nbr / 2240;
+	  formule = 'diviser la valeur "masse" par 2240';
+	}else if(SecondChoice =='Stone'){
+	  resulta =  Nbr / 14;
+	  formule = 'diviser la valeur "masse" par 14';
+	}else if(SecondChoice =='Livre'){
+	  resulta =  Nbr;
+	  formule = 'Same Number';
+	}else if(SecondChoice =='Once'){
+	  resulta =  Nbr * 16;
+	  formule = 'multiplier la valeur "masse" par 16';
+	}else if(SecondChoice =='Gramme'){
+	  resulta =  Nbr * 453.592;
+	  formule = 'pour obtenir un résultat approximatif, multiplier la valeur "masse" par 453,592';
+	}
+	result(resulta,formule,SecondChoice);
+ }
+ 
+ function Once(SecondChoice,Nbr){
+    var resulta      = '';
+	var formule      = '';
+    if(SecondChoice =='Kilogramme'){
+	  resulta =  Nbr / 35.274 ;
+	  formule = 'diviser la valeur "masse" par 35,274';
+	}else if(SecondChoice =='Tonne'){
+	  resulta =  Nbr / 35273.962;
+	  formule = 'diviser la valeur "masse" par 35273,962';
+	}else if(SecondChoice =='Milligramme'){
+	  resulta =  Nbr * 28349.523;
+	  formule = 'pour obtenir un résultat approximatif, multiplier la valeur "masse" par 28349,523';
+	}else if(SecondChoice =='Microgramme'){
+	  resulta =  Nbr * parseInt(2.835e+7);
+	  formule = 'multiplier la valeur "masse" par 2,835e+7';
+	}else if(SecondChoice =='Tonne longue'){
+	  resulta =  Nbr / 35840;
+	  formule = 'diviser la valeur "masse" par 35840';
+	}else if(SecondChoice =='Stone'){
+	  resulta =  Nbr / 224;
+	  formule = 'diviser la valeur "masse" par 224';
+	}else if(SecondChoice =='Livre'){
+	  resulta =  Nbr / 16;
+	  formule = 'diviser la valeur "masse" par 16';
+	}else if(SecondChoice =='Once'){
+	  resulta =  Nbr ;
+	  formule = 'Same Number';
+	}else if(SecondChoice =='Gramme'){
+	  resulta =  Nbr * 28.35;
+	  formule = 'pour obtenir un résultat approximatif, multiplier la valeur "masse" par 28,35';
+	}
+	result(resulta,formule,SecondChoice);
+ }
+ 
+ function CountDecimalDigits(number){
+  var char_array = number.toString().split(""); // split every single char
+  var not_decimal = char_array.lastIndexOf(".");
+  return (not_decimal<0)?0:char_array.length - not_decimal;
+ }
+ 
+ function result(resulta,formule,type){
+
+    var count = CountDecimalDigits(resulta);
+	console.log(count);
+	var res   = resulta;
+	if(count > 7 || resulta > 10000000)
+	res=resulta.toExponential();
+	
+    $('#resulta').html('<center><h6>'+res+'</6> <code>'+type+'</code></center>');
+	$('#formule').html('<div  class="border border-info rounded" style="padding-bottom:4px"><span class="badge badge-success" style="margin-left : 10px">Formule</span> : <code style="font-size:12px">'+formule+'</code></div>');
+ }
+ 
+ $("#changet").change(function(){
+     var type = $('#changet').val();
+     if(type == 'Masse'){
+        option = ['Tonne','Kilogramme','Gramme','Milligramme','Microgramme','Tonne longue','Stone','Livre','Once'];  
+     }
+       var select=''; 
+       $.each(option, function( index, value ) {
+            select +='<option>'+value+'</option>';
+        })
+       $('#DivFirstChoice').html('<select id="FirstChoice">'+select+'</select>');
+	   $('#DivSecondChoice').html('<select id="SecondChoice">'+select+'</select>');
+  })
+ 
+ </script>
+
+ 
+
+
+
+</html>
